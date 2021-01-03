@@ -19,11 +19,9 @@ function loadLaunches() {
     // Load launches and sort by flight number.
 }
 
-function loadPlanets() {
-    const planets = [
-        {kepler_name: "X Æ A-12"},
-        {kepler_name: "Beta Gamma B"}
-    ];
+async function loadPlanets() {
+    const response = await fetch("/planets");
+    const planets = await response.json();
 
     const planetSelector = document.getElementById("planets-selector");
     planets.forEach((planet) => {
@@ -106,8 +104,8 @@ function navigate(navigateTo) {
     }
 }
 
-window.onload = () => {
+window.onload = async () => {
     initValues();
     loadLaunches();
-    loadPlanets();
+    await loadPlanets();
 };
